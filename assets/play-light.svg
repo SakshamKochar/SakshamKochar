@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 132" width="420" height="132" role="img" aria-label="A constellation being traced across a night sky">
+<title>A constellation being traced across a night sky</title>
+<style>
+text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif;fill:#0d1117}
+.m{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace}
+.cap{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace;font-size:11px;fill:#57606a;letter-spacing:.3px}
+.dim{fill:#57606a}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+
+.tw{animation:tw 4s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.25}50%{opacity:1}}
+.con{stroke-dasharray:1;animation:con 12s ease-in-out infinite both}
+@keyframes con{0%{stroke-dashoffset:1;opacity:.8}30%{stroke-dashoffset:0}86%{stroke-dashoffset:0;opacity:.8}94%,100%{stroke-dashoffset:0;opacity:0}}
+</style>
+<rect x=".5" y=".5" width="419" height="131" rx="14" fill="#ffffff" stroke="#d5dbe3"/>
+<text class="cap" x="18" y="24">fig. 7 · side quests</text>
+<circle class="tw" cx="191.3" cy="83.3" r="0.9" fill="#57606a" style="animation-delay:1.8s"/>
+<circle class="tw" cx="349.2" cy="50.7" r="1.2" fill="#57606a" style="animation-delay:1.9s"/>
+<circle class="tw" cx="254.7" cy="50.4" r="0.9" fill="#57606a" style="animation-delay:1.2s"/>
+<circle class="tw" cx="49.5" cy="105.2" r="1.2" fill="#57606a" style="animation-delay:2.5s"/>
+<circle class="tw" cx="247.4" cy="68.9" r="0.9" fill="#57606a" style="animation-delay:2.6s"/>
+<circle class="tw" cx="255.3" cy="47.9" r="0.7" fill="#57606a" style="animation-delay:3.3s"/>
+<circle class="tw" cx="38.8" cy="37.1" r="0.7" fill="#57606a" style="animation-delay:2.4s"/>
+<circle class="tw" cx="319" cy="62.7" r="1.2" fill="#57606a" style="animation-delay:3.4s"/>
+<circle class="tw" cx="217.5" cy="90.3" r="0.9" fill="#57606a" style="animation-delay:0.0s"/>
+<circle class="tw" cx="47.3" cy="91.6" r="0.9" fill="#57606a" style="animation-delay:4.0s"/>
+<circle class="tw" cx="404.3" cy="107.9" r="1.2" fill="#57606a" style="animation-delay:1.0s"/>
+<circle class="tw" cx="311.1" cy="79.1" r="0.7" fill="#57606a" style="animation-delay:0.3s"/>
+<circle class="tw" cx="314.4" cy="69.2" r="0.9" fill="#57606a" style="animation-delay:1.5s"/>
+<circle class="tw" cx="389.6" cy="108.6" r="0.7" fill="#57606a" style="animation-delay:0.9s"/>
+<circle class="tw" cx="377.4" cy="38.6" r="0.9" fill="#57606a" style="animation-delay:3.9s"/>
+<circle class="tw" cx="169.8" cy="40.4" r="1.2" fill="#57606a" style="animation-delay:0.8s"/>
+<circle class="tw" cx="278.6" cy="63.6" r="0.9" fill="#57606a" style="animation-delay:1.3s"/>
+<circle class="tw" cx="391.9" cy="100.7" r="0.7" fill="#57606a" style="animation-delay:0.5s"/>
+<circle class="tw" cx="291.2" cy="35" r="0.9" fill="#57606a" style="animation-delay:3.2s"/>
+<circle class="tw" cx="83.6" cy="83.2" r="0.9" fill="#57606a" style="animation-delay:2.0s"/>
+<circle class="tw" cx="400.2" cy="101.7" r="0.9" fill="#57606a" style="animation-delay:2.6s"/>
+<circle class="tw" cx="59.7" cy="71" r="0.7" fill="#57606a" style="animation-delay:0.0s"/>
+<circle class="tw" cx="352.8" cy="119.8" r="1.2" fill="#57606a" style="animation-delay:1.2s"/>
+<circle class="tw" cx="360.9" cy="52.5" r="0.9" fill="#57606a" style="animation-delay:4.0s"/>
+<circle class="tw" cx="250" cy="84.8" r="0.7" fill="#57606a" style="animation-delay:4.0s"/>
+<circle class="tw" cx="97.6" cy="56.7" r="1.2" fill="#57606a" style="animation-delay:1.3s"/>
+<circle class="tw" cx="130.2" cy="40.5" r="0.7" fill="#57606a" style="animation-delay:0.8s"/>
+<circle class="tw" cx="263.5" cy="35.4" r="0.9" fill="#57606a" style="animation-delay:1.5s"/>
+<circle class="tw" cx="191.7" cy="118.4" r="0.9" fill="#57606a" style="animation-delay:3.3s"/>
+<circle class="tw" cx="67.2" cy="68" r="1.2" fill="#57606a" style="animation-delay:0.6s"/>
+<circle class="tw" cx="370.1" cy="106" r="0.7" fill="#57606a" style="animation-delay:2.9s"/>
+<circle class="tw" cx="76.1" cy="89.4" r="1.2" fill="#57606a" style="animation-delay:0.8s"/>
+<circle class="tw" cx="386.5" cy="111.6" r="1.2" fill="#57606a" style="animation-delay:0.3s"/>
+<circle class="tw" cx="32.6" cy="43.6" r="1.2" fill="#57606a" style="animation-delay:3.9s"/>
+<circle class="tw" cx="107.5" cy="96" r="0.9" fill="#57606a" style="animation-delay:1.7s"/>
+<circle class="tw" cx="368.7" cy="77.2" r="1.2" fill="#57606a" style="animation-delay:0.7s"/>
+<circle class="tw" cx="296.4" cy="40.1" r="0.7" fill="#57606a" style="animation-delay:1.9s"/>
+<circle class="tw" cx="270.2" cy="88.2" r="0.7" fill="#57606a" style="animation-delay:1.1s"/>
+<circle class="tw" cx="373.6" cy="52" r="0.7" fill="#57606a" style="animation-delay:0.3s"/>
+<circle class="tw" cx="175.3" cy="55.9" r="0.7" fill="#57606a" style="animation-delay:0.7s"/>
+<circle class="tw" cx="158.6" cy="84.4" r="0.7" fill="#57606a" style="animation-delay:0.4s"/>
+<circle class="tw" cx="68.3" cy="73.6" r="0.9" fill="#57606a" style="animation-delay:2.6s"/>
+<circle class="tw" cx="285" cy="85.4" r="0.7" fill="#57606a" style="animation-delay:2.4s"/>
+<circle class="tw" cx="376" cy="75.8" r="0.9" fill="#57606a" style="animation-delay:2.8s"/>
+<circle class="tw" cx="391.4" cy="35.9" r="1.2" fill="#57606a" style="animation-delay:0.3s"/>
+<circle class="tw" cx="40.4" cy="61.4" r="0.7" fill="#57606a" style="animation-delay:4.0s"/>
+<path class="con" pathLength="1" d="M70,96L118,62L166,84L214,50L262,74L300,104L352,60" fill="none" stroke="#0a7ea4" stroke-width="1.2" opacity=".8"/>
+<circle cx="70" cy="96" r="2.4" fill="#0d1117"/>
+<circle cx="118" cy="62" r="2.4" fill="#0d1117"/>
+<circle cx="166" cy="84" r="2.4" fill="#0d1117"/>
+<circle cx="214" cy="50" r="3.4" fill="#b76e00"/>
+<circle cx="262" cy="74" r="2.4" fill="#0d1117"/>
+<circle cx="300" cy="104" r="2.4" fill="#0d1117"/>
+<circle cx="352" cy="60" r="2.4" fill="#0d1117"/>
+</svg>

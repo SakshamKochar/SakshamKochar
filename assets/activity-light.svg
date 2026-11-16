@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 236" width="840" height="236" role="img" aria-label="Commit activity chart, waiting for first data sync">
+<title>Commit activity chart, waiting for first data sync</title>
+<style>
+text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif;fill:#0d1117}
+.m{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace}
+.cap{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace;font-size:11px;fill:#57606a;letter-spacing:.3px}
+.dim{fill:#57606a}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+<rect x=".5" y=".5" width="839" height="235" rx="14" fill="#ffffff" stroke="#d5dbe3"/>
+<text class="cap" x="28" y="30">fig. 9 · commit signal, last 12 months · redrawn nightly by scripts/build.py</text>
+<path d="M40,150H800" stroke="#b6bfca" stroke-dasharray="3 6"/>
+<text x="420" y="122" font-size="14" text-anchor="middle" fill="#57606a">Waiting for the first sync.</text>
+<text class="cap" x="420" y="178" text-anchor="middle">This figure draws itself from live contribution data once the workflow has run.</text>
+</svg>

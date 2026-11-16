@@ -114,13 +114,6 @@ license: open to Summer 2027 data science and ML internships
   <img src="assets/pipeline-light.svg" width="100%" alt="Stack, in the order data moves through it. Query: SQL, PostgreSQL, SQLite, MySQL, Parquet. Analyze: Python, pandas, NumPy, time series, NLP. Serve: FastAPI, SQLAlchemy, REST, Firebase, Docker. Show: React, TypeScript, Power BI, Three.js, Figma.">
 </picture>
 
-## Activity
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/activity-dark.svg">
-  <img src="assets/activity-light.svg" width="100%" alt="Weekly commit activity over the last 12 months with a 4-week rolling mean">
-</picture>
-
 <p align="center">
-  <sub>Every figure on this page is drawn by <a href="scripts/build.py">one Python script</a> in this repo. No templates, no third-party widgets. The activity chart redraws itself from live data every night.</sub>
+  <sub>Every figure on this page is drawn by <a href="scripts/build.py">one Python script</a> in this repo. No templates, no third-party widgets.</sub>
 </p>

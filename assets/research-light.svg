@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 132" width="420" height="132" fill="#0d1117" role="img" aria-label="Four trend lines from 2015 to 2025 with burnout rising fastest">
-<title>Four trend lines from 2015 to 2025 with burnout rising fastest</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 132" width="420" height="132" fill="#0d1117" role="img" aria-label="Four search interest trend lines from 2015 to 2025: depression highest throughout, ADHD and trauma roughly tripling, burnout rising from a low base">
+<title>Four search interest trend lines from 2015 to 2025: depression highest throughout, ADHD and trauma roughly tripling, burnout rising from a low base</title>
 <style>
 text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif}
 .m{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace}
@@ -19,12 +19,12 @@ text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helveti
 <text class="cap" fill="#57606a" x="22" y="118" font-size="10" text-anchor="start">2015</text>
 <text class="cap" fill="#57606a" x="170" y="118" font-size="10" text-anchor="middle">2020</text>
 <text class="cap" fill="#57606a" x="318" y="118" font-size="10" text-anchor="end">2025</text>
-<path class="ln" pathLength="1" d="M22,88.8C26.9,88.6 41.7,88 51.6,87.6C61.5,87.2 71.3,86.9 81.2,86.4C91.1,85.8 100.9,85.3 110.8,84.5C120.7,83.7 130.5,82.5 140.4,81.4C150.3,80.3 160.1,79.7 170,77.7C179.9,75.6 189.7,71.3 199.6,69C209.5,66.7 219.3,66.1 229.2,64C239.1,62 248.9,59.3 258.8,56.6C268.7,53.9 278.5,50.7 288.4,47.9C298.3,45.1 313.1,41.2 318,39.9" fill="none" stroke="#0a7ea4" stroke-width="2.6" stroke-linecap="round" style="animation-delay:0.0s"/>
-<path class="ln" pathLength="1" d="M22,81.4C26.9,81.3 41.7,81.1 51.6,80.8C61.5,80.5 71.3,79.8 81.2,79.5C91.1,79.2 100.9,79.3 110.8,78.9C120.7,78.5 130.5,78.2 140.4,77.1C150.3,75.9 160.1,74.5 170,72.1C179.9,69.7 189.7,65.4 199.6,62.8C209.5,60.2 219.3,57.8 229.2,56.6C239.1,55.4 248.9,55.4 258.8,55.4C268.7,55.4 278.5,56.8 288.4,56.6C298.3,56.4 313.1,54.5 318,54.1" fill="none" stroke="#6b4bd8" stroke-width="1.7" stroke-linecap="round" style="animation-delay:0.3s"/>
-<path class="ln" pathLength="1" d="M22,77.7C26.9,77.5 41.7,76.9 51.6,76.4C61.5,76 71.3,75.7 81.2,75.2C91.1,74.7 100.9,74 110.8,73.3C120.7,72.7 130.5,72.4 140.4,71.5C150.3,70.5 160.1,68.7 170,67.8C179.9,66.8 189.7,66.3 199.6,65.9C209.5,65.5 219.3,65.3 229.2,65.3C239.1,65.3 248.9,65.6 258.8,65.9C268.7,66.2 278.5,67 288.4,67.1C298.3,67.2 313.1,66.6 318,66.5" fill="none" stroke="#b76e00" stroke-width="1.7" stroke-linecap="round" style="animation-delay:0.6s"/>
-<path class="ln" pathLength="1" d="M22,62.8C26.9,62.8 41.7,62.9 51.6,62.8C61.5,62.7 71.3,62.2 81.2,62.2C91.1,62.2 100.9,62.7 110.8,62.8C120.7,62.9 130.5,63.2 140.4,62.8C150.3,62.4 160.1,60.5 170,60.3C179.9,60.1 189.7,61.1 199.6,61.6C209.5,62 219.3,62.4 229.2,62.8C239.1,63.2 248.9,63.7 258.8,64C268.7,64.3 278.5,64.5 288.4,64.7C298.3,64.9 313.1,65.2 318,65.3" fill="none" stroke="#57606a" stroke-width="1.7" stroke-linecap="round" style="animation-delay:0.9s"/>
-<text class="m lab" x="327" y="43.4" font-size="10" fill="#0a7ea4">burnout</text>
-<text class="m lab" x="327" y="57.6" font-size="10" fill="#6b4bd8">ADHD</text>
-<text class="m lab" x="327" y="69.6" font-size="10" fill="#57606a">depression</text>
-<text class="m lab" x="327" y="81.6" font-size="10" fill="#b76e00">trauma</text>
+<path class="ln" pathLength="1" d="M22,47.9C26.9,47.8 41.7,47.5 51.6,47.3C61.5,47.1 71.3,46.7 81.2,46.7C91.1,46.7 100.9,47.3 110.8,47.3C120.7,47.3 130.5,47.2 140.4,46.7C150.3,46.2 160.1,44.4 170,44.2C179.9,44 189.7,45.1 199.6,45.4C209.5,45.8 219.3,45.5 229.2,46.1C239.1,46.6 248.9,47.8 258.8,48.5C268.7,49.3 278.5,49.9 288.4,50.4C298.3,50.9 313.1,51.4 318,51.6" fill="none" stroke="#57606a" stroke-width="1.7" stroke-linecap="round" style="animation-delay:0.0s"/>
+<path class="ln" pathLength="1" d="M22,87.6C26.9,87.5 41.7,87.3 51.6,87C61.5,86.7 71.3,86.2 81.2,85.7C91.1,85.3 100.9,85 110.8,84.5C120.7,84 130.5,83.8 140.4,82.6C150.3,81.5 160.1,80 170,77.7C179.9,75.4 189.7,71.5 199.6,69C209.5,66.5 219.3,63.8 229.2,62.8C239.1,61.8 248.9,62.9 258.8,62.8C268.7,62.7 278.5,62.5 288.4,62.2C298.3,61.9 313.1,61.1 318,60.9" fill="none" stroke="#0a7ea4" stroke-width="2.6" stroke-linecap="round" style="animation-delay:0.3s"/>
+<path class="ln" pathLength="1" d="M22,90.1C26.9,90 41.7,89.8 51.6,89.5C61.5,89.1 71.3,88.7 81.2,88.2C91.1,87.7 100.9,87 110.8,86.4C120.7,85.7 130.5,85.4 140.4,84.5C150.3,83.6 160.1,82.3 170,80.8C179.9,79.2 189.7,76.8 199.6,75.2C209.5,73.7 219.3,72.2 229.2,71.5C239.1,70.8 248.9,71.1 258.8,70.9C268.7,70.7 278.5,70.6 288.4,70.2C298.3,69.9 313.1,69.2 318,69" fill="none" stroke="#6b4bd8" stroke-width="2.0" stroke-linecap="round" style="animation-delay:0.6s"/>
+<path class="ln" pathLength="1" d="M22,97.5C26.9,97.5 41.7,97.6 51.6,97.5C61.5,97.4 71.3,97.1 81.2,96.9C91.1,96.7 100.9,96.7 110.8,96.3C120.7,95.9 130.5,94.6 140.4,94.4C150.3,94.2 160.1,95.6 170,95C179.9,94.5 189.7,91.7 199.6,91.3C209.5,90.9 219.3,93.1 229.2,92.6C239.1,92 248.9,88.6 258.8,88.2C268.7,87.8 278.5,90.6 288.4,90.1C298.3,89.6 313.1,85.9 318,85.1" fill="none" stroke="#b76e00" stroke-width="1.7" stroke-linecap="round" style="animation-delay:0.9s"/>
+<text class="m lab" x="327" y="55.1" font-size="10" fill="#57606a">depression</text>
+<text class="m lab" x="327" y="67.1" font-size="10" fill="#0a7ea4">ADHD</text>
+<text class="m lab" x="327" y="79.1" font-size="10" fill="#6b4bd8">trauma</text>
+<text class="m lab" x="327" y="91.1" font-size="10" fill="#b76e00">burnout</text>
 </svg>

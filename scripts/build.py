@@ -207,10 +207,10 @@ def strip_lifeops(t):
 def strip_research(t):
     x0, x1, y0, y1 = 22, 318, 38, 100
     series = [
-        ("burnout", t["accent"], [0.18, 0.2, 0.22, 0.25, 0.3, 0.36, 0.5, 0.58, 0.7, 0.84, 0.97], 2.6),
-        ("ADHD", t["violet"], [0.3, 0.31, 0.33, 0.34, 0.37, 0.45, 0.6, 0.7, 0.72, 0.7, 0.74], 1.7),
-        ("trauma", t["amber"], [0.36, 0.38, 0.4, 0.43, 0.46, 0.52, 0.55, 0.56, 0.55, 0.53, 0.54], 1.7),
-        ("depression", t["mute"], [0.6, 0.6, 0.61, 0.6, 0.6, 0.64, 0.62, 0.6, 0.58, 0.57, 0.56], 1.7),
+        ("depression", t["mute"], [0.84, 0.85, 0.86, 0.85, 0.86, 0.9, 0.88, 0.87, 0.83, 0.8, 0.78], 1.7),
+        ("ADHD", t["accent"], [0.2, 0.21, 0.23, 0.25, 0.28, 0.36, 0.5, 0.6, 0.6, 0.61, 0.63], 2.6),
+        ("trauma", t["violet"], [0.16, 0.17, 0.19, 0.22, 0.25, 0.31, 0.4, 0.46, 0.47, 0.48, 0.5], 2.0),
+        ("burnout", t["amber"], [0.04, 0.04, 0.05, 0.06, 0.09, 0.08, 0.14, 0.12, 0.19, 0.16, 0.24], 1.7),
     ]
     b = []
     for i in range(3):
@@ -238,7 +238,7 @@ def strip_research(t):
 @keyframes lab{0%,22%{opacity:0}30%{opacity:1}86%{opacity:1}93%,100%{opacity:0}}
 """
     return strip(t, "fig. 7 · search interest by term (stylized)", "\n".join(b), css,
-                 "Four trend lines from 2015 to 2025 with burnout rising fastest")
+                 "Four search interest trend lines from 2015 to 2025: depression highest throughout, ADHD and trauma roughly tripling, burnout rising from a low base")
 
 
 def strip_fairclaim(t):
@@ -270,23 +270,42 @@ def strip_fairclaim(t):
 
 def strip_play(t):
     rng = random.Random(11)
-    b = []
-    for _ in range(46):
-        x, y = rng.uniform(14, 406), rng.uniform(34, 122)
-        b.append(f'<circle class="tw" cx="{r(x)}" cy="{r(y)}" r="{rng.choice([0.7, 0.9, 1.2])}" fill="{t["mute"]}" style="animation-delay:{rng.uniform(0, 4):.1f}s"/>')
-    stars = [(70, 96), (118, 62), (166, 84), (214, 50), (262, 74), (300, 104), (352, 60)]
-    d = "M" + "L".join(f"{x},{y}" for x, y in stars)
-    b.append(f'<path class="con" pathLength="1" d="{d}" fill="none" stroke="{t["accent"]}" stroke-width="1.2" opacity=".8"/>')
-    for i, (x, y) in enumerate(stars):
-        col = t["amber"] if i == 3 else t["ink"]
-        b.append(f'<circle cx="{x}" cy="{y}" r="{3.4 if i == 3 else 2.4}" fill="{col}"/>')
+    pts = [(55, 98), (38, 88), (26, 76), (18, 64), (12, 54), (42, 58), (38, 40), (36, 28), (34, 18),
+           (54, 54), (54, 34), (54, 21), (54, 10), (66, 57), (69, 39), (71, 27), (72, 17),
+           (77, 64), (83, 50), (87, 41), (90, 33)]
+    ox, oy, sc = 34, 30, 0.92
+    P = [(ox + x * sc, oy + y * sc) for x, y in pts]
+    bones = [(0, 1), (1, 2), (2, 3), (3, 4), (0, 5), (5, 6), (6, 7), (7, 8), (5, 9), (9, 10), (10, 11), (11, 12),
+             (9, 13), (13, 14), (14, 15), (15, 16), (13, 17), (17, 18), (18, 19), (19, 20), (0, 17)]
+    b = ['<g class="hand">']
+    for i, j in bones:
+        b.append(f'<line x1="{r(P[i][0])}" y1="{r(P[i][1])}" x2="{r(P[j][0])}" y2="{r(P[j][1])}" stroke="{t["faint"]}" stroke-width="1.6" stroke-linecap="round"/>')
+    for k, (x, y) in enumerate(P):
+        tip = k in (4, 8, 12, 16, 20)
+        b.append(f'<circle cx="{r(x)}" cy="{r(y)}" r="{3 if tip else 2.1}" fill="{t["accent"] if tip else t["mute"]}"/>')
+        if tip:
+            b.append(f'<circle class="tip" cx="{r(x)}" cy="{r(y)}" r="3" fill="none" stroke="{t["accent"]}" style="animation-delay:{k * 0.06:.2f}s"/>')
+    b.append("</g>")
+    b.append(f'<path d="M146,78h22" stroke="{t["faint"]}" stroke-width="1.4" stroke-dasharray="2 4" stroke-linecap="round"/>')
+    b.append(f'<circle class="go" cx="146" cy="78" r="2.4" fill="{t["accent"]}"/>')
+    cols = [t["accent"], t["violet"], t["pink"], t["amber"]]
+    for i in range(24):
+        x = 184 + i * 9.2
+        h = 14 + 52 * abs(math.sin(i * 0.55 + 0.6)) * rng.uniform(0.55, 1)
+        b.append(f'<rect class="eq" x="{r(x)}" y="{r(78 - h / 2)}" width="5.4" height="{r(h)}" rx="2.7" fill="{cols[i * 4 // 24]}" '
+                 f'style="animation-delay:-{rng.uniform(0, 1.4):.2f}s;animation-duration:{rng.uniform(0.7, 1.3):.2f}s"/>')
     css = """
-.tw{animation:tw 4s ease-in-out infinite}
-@keyframes tw{0%,100%{opacity:.25}50%{opacity:1}}
-.con{stroke-dasharray:1;animation:con 12s ease-in-out infinite both}
-@keyframes con{0%{stroke-dashoffset:1;opacity:.8}30%{stroke-dashoffset:0}86%{stroke-dashoffset:0;opacity:.8}94%,100%{stroke-dashoffset:0;opacity:0}}
+.hand{transform-box:fill-box;transform-origin:50% 90%;animation:hand 4s ease-in-out infinite}
+@keyframes hand{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(5deg)}}
+.tip{opacity:0;transform-box:fill-box;transform-origin:center;animation:tip 2s ease-out infinite}
+@keyframes tip{0%{opacity:.8;transform:scale(1)}100%{opacity:0;transform:scale(3)}}
+.eq{transform-box:fill-box;transform-origin:center;animation:eq 1s ease-in-out infinite alternate}
+@keyframes eq{0%{transform:scaleY(.35)}100%{transform:scaleY(1)}}
+.go{animation:go 1.8s ease-in-out infinite}
+@keyframes go{0%{transform:translateX(0);opacity:0}20%{opacity:1}80%{opacity:1}100%{transform:translateX(22px);opacity:0}}
 """
-    return strip(t, "fig. 9 · side quests", "\n".join(b), css, "A constellation being traced across a night sky")
+    return strip(t, "fig. 9 · hand landmarks in, sound out", "\n".join(b), css,
+                 "A tracked hand skeleton with 21 landmarks driving an audio equalizer")
 
 
 # ------------------------------------------------------------- highlights
@@ -335,7 +354,7 @@ def training_log(t):
     span = 23.6
 
     def L(m):
-        return 0.1 + sum(w * (1 - 1 / (1 + math.exp(-(m - c - 0.5) * 3.2))) for c, w, *_ in cps)
+        return 0.08 + sum(w / (1 + math.exp(-(m - c - 0.5) * 3.2)) for c, w, *_ in cps)
 
     def X(m):
         return x0 + m / span * (x1 - x0)
@@ -343,14 +362,14 @@ def training_log(t):
     def Y(v):
         return y1 - v * (y1 - y0)
 
-    b = [f'<text class="cap" x="28" y="30">fig. 2 · training log: loss over time, lower is better</text>']
+    b = [f'<text class="cap" x="28" y="30">fig. 2 · training log: eval score over time, higher is better</text>']
     for i in range(4):
         y = y0 + i * (y1 - y0) / 3
         b.append(f'<line x1="{x0}" y1="{r(y)}" x2="{x1}" y2="{r(y)}" stroke="{t["grid"]}"/>')
     b.append(f'<path d="M{x0},{y0 - 8}V{y1}H{x1 + 8}" fill="none" stroke="{t["faint"]}"/>')
     b.append(f'<text class="cap" x="{x0 - 10}" y="{y0 + 4}" font-size="10" text-anchor="end">1.0</text>')
     b.append(f'<text class="cap" x="{x0 - 10}" y="{y1 + 3}" font-size="10" text-anchor="end">0.0</text>')
-    b.append(f'<text class="cap" transform="translate(24,{(y0 + y1) / 2 + 12}) rotate(-90)" font-size="10">loss</text>')
+    b.append(f'<text class="cap" transform="translate(24,{(y0 + y1) / 2 + 12}) rotate(-90)" font-size="10">score</text>')
     for m, lab in [(0, "Jan 2025"), (6, "Jul"), (12, "Jan 2026"), (18, "Jul"), (22.4, "now")]:
         b.append(f'<line x1="{r(X(m))}" y1="{y1}" x2="{r(X(m))}" y2="{y1 + 4}" stroke="{t["faint"]}"/>')
         b.append(f'<text class="cap" x="{r(X(m))}" y="{y1 + 18}" font-size="10" text-anchor="middle">{lab}</text>')
@@ -374,7 +393,7 @@ def training_log(t):
         b.append(f'<text x="{kx + 28}" y="{ky - 5}" font-size="13.5" font-weight="700">{esc(title)}</text>')
         b.append(f'<text class="cap" x="{kx + 28}" y="{ky + 10}" font-size="10.5">{esc(sub)}</text>')
         b.append("</g>")
-    b.append(f'<text class="cap" x="{kx}" y="{H - 22}" font-size="10">checkpoint saved at every drop</text>')
+    b.append(f'<text class="cap" x="{kx}" y="{H - 22}" font-size="10">checkpoint saved at every jump</text>')
     css = """
 .va{stroke-dasharray:1;animation:va 18s ease-in-out infinite}
 .tr{stroke-dasharray:1;animation:va 18s ease-in-out infinite}
@@ -383,7 +402,7 @@ def training_log(t):
 @keyframes cp{0%{opacity:0}3%{opacity:1}86%{opacity:1}92%,100%{opacity:0}}
 """
     return svg(W, H, t, css, "\n".join(b),
-               "A training loss curve that drops at five checkpoints: Saxo Bank internship, ASU research and The AI Society, "
+               "An eval score curve that climbs at five checkpoints: Saxo Bank internship, ASU research and The AI Society, "
                "Blink Charging internship, Academic Officer and Instructional Aide, and ReCompute taking 3rd place")
 
 

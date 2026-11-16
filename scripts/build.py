@@ -10,6 +10,7 @@ import json
 import math
 import os
 import random
+import re
 import sys
 import urllib.request
 from datetime import date
@@ -44,21 +45,22 @@ def r(x):
     return f"{x:.1f}".rstrip("0").rstrip(".")
 
 
-def svg(w, h, t, css, body, label):
+def svg(w, h, t, css, body, label, frame=True):
     base = Template("""
-text{font-family:$sans;fill:$ink}
+text{font-family:$sans}
 .m{font-family:$mono}
-.cap{font-family:$mono;font-size:11px;fill:$mute;letter-spacing:.3px}
-.dim{fill:$mute}
+.cap{font-family:$mono;font-size:11px;letter-spacing:.3px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 """).substitute(sans=SANS, mono=MONO, **t)
     css = Template(css).substitute(sans=SANS, mono=MONO, **t)
+    # Colours are attributes, not CSS, so a per-element fill always wins over the default.
+    body = re.sub(r'<text class="cap"(?![^>]* fill=)', f'<text class="cap" fill="{t["mute"]}"', body)
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}" '
-        f'role="img" aria-label="{esc(label)}">\n<title>{esc(label)}</title>\n'
+        f'fill="{t["ink"]}" role="img" aria-label="{esc(label)}">\n<title>{esc(label)}</title>\n'
         f"<style>{base}{css}</style>\n"
-        f'<rect x=".5" y=".5" width="{w - 1}" height="{h - 1}" rx="14" fill="{t["bg"]}" stroke="{t["line"]}"/>\n'
-        f"{body}\n</svg>\n"
+        + (f'<rect x=".5" y=".5" width="{w - 1}" height="{h - 1}" rx="14" fill="{t["bg"]}" stroke="{t["line"]}"/>\n' if frame else "")
+        + f"{body}\n</svg>\n"
     )
 
 
@@ -133,6 +135,7 @@ def hero(t):
     b.append(f'<text x="44" y="174" font-size="16.5" fill="{t["mute"]}">I find the signal in messy data,</text>')
     b.append(f'<text x="44" y="197" font-size="16.5" fill="{t["mute"]}">then build the tool that puts it to work.</text>')
     roles = [
+        "3rd place, ASU Reverse the Future 2026",
         "Data Science Intern @ Blink Charging",
         "Academic Officer @ The AI Society at ASU",
         "B.S. Data Science, Arizona State, class of 2028",
@@ -156,8 +159,8 @@ def hero(t):
 @keyframes now{0%,34%{opacity:0}38%{opacity:1}90%{opacity:1}97%,100%{opacity:0}}
 .ring{opacity:0;transform-box:fill-box;transform-origin:center;animation:ring 2s ease-out infinite}
 @keyframes ring{0%{opacity:.7;transform:scale(1)}100%{opacity:0;transform:scale(3.4)}}
-.role{animation:role 16s linear infinite}
-@keyframes role{0%{opacity:0}2.5%{opacity:1}22.5%{opacity:1}25%,100%{opacity:0}}
+.role{animation:role 20s linear infinite}
+@keyframes role{0%{opacity:0}2%{opacity:1}18%{opacity:1}20%,100%{opacity:0}}
 """
     return svg(W, H, t, css, "\n".join(b), "Saksham Kochar. Data scientist. A fitted curve emerging from noisy observations.")
 
@@ -169,60 +172,6 @@ SW, SH = 420, 132
 def strip(t, caption, body, css, label):
     head = f'<text class="cap" x="18" y="24">{esc(caption)}</text>'
     return svg(SW, SH, t, css, head + "\n" + body, label)
-
-
-def strip_blink(t):
-    rng = random.Random(21)
-    cats = [(t["green"], 0.62), (t["amber"], 0.14), (t["pink"], 0.09), (t["violet"], 0.09), (t["faint"], 0.06)]
-    cols, rows, s, g = 29, 5, 10, 3.2
-    b = []
-    for c in range(cols):
-        for rw in range(rows):
-            x, y = 18 + c * (s + g), 36 + rw * (s + g)
-            roll, acc, col = rng.random(), 0, cats[-1][0]
-            for cc, p in cats:
-                acc += p
-                if roll < acc:
-                    col = cc
-                    break
-            d = c * 0.11 + rng.random() * 0.25
-            b.append(f'<rect x="{r(x)}" y="{r(y)}" width="{s}" height="{s}" rx="2.2" fill="{t["faint"]}"/>')
-            b.append(f'<rect class="c" x="{r(x)}" y="{r(y)}" width="{s}" height="{s}" rx="2.2" fill="{col}" style="animation-delay:{d:.2f}s"/>')
-    b.append(f'<rect class="scan" x="14" y="32" width="2" height="{rows * (s + g) + 4}" rx="1" fill="{t["accent"]}"/>')
-    lx = 18
-    for name, col in [("completed", t["green"]), ("no start", t["amber"]), ("fault", t["pink"]), ("interrupted", t["violet"])]:
-        b.append(f'<rect x="{lx}" y="110" width="8" height="8" rx="2" fill="{col}"/><text class="cap" x="{lx + 13}" y="118" font-size="10">{name}</text>')
-        lx += 22 + len(name) * 6.4
-    css = """
-.c{animation:c 11s ease infinite}
-@keyframes c{0%{opacity:0}4%{opacity:1}88%{opacity:1}96%,100%{opacity:0}}
-.scan{animation:scan 11s linear infinite}
-@keyframes scan{0%{transform:translateX(0);opacity:1}30%{transform:translateX(388px);opacity:1}33%,100%{transform:translateX(388px);opacity:0}}
-"""
-    return strip(t, "fig. 2 · raw charger logs, classified (illustrative)", "\n".join(b), css,
-                 "A grid of charging sessions being classified into categories")
-
-
-def strip_recompute(t):
-    routes = [("sell now", 0.62), ("list and wait", 0.7), ("rent while listed", 0.78), ("host longer", 0.93),
-              ("repair", 0.55), ("harvest parts", 0.4), ("recycle", 0.16)]
-    b = []
-    for i, (name, v) in enumerate(routes):
-        y = 37 + i * 13
-        best = name == "host longer"
-        col = t["accent"] if best else t["faint"]
-        b.append(f'<text class="m" x="128" y="{y + 8}" font-size="10" text-anchor="end" fill="{t["ink"] if best else t["mute"]}">{name}</text>')
-        b.append(f'<rect class="bar" x="138" y="{y}" width="{r(v * 210)}" height="9" rx="2.5" fill="{col}" style="animation-delay:{i * 0.12:.2f}s"/>')
-        if best:
-            b.append(f'<text class="m tag" x="{r(138 + v * 210 + 8)}" y="{y + 8}" font-size="10" fill="{t["accent"]}">best route</text>')
-    css = """
-.bar{transform-box:fill-box;transform-origin:left center;animation:bar 10s cubic-bezier(.2,.8,.2,1) infinite}
-@keyframes bar{0%{transform:scaleX(0)}14%{transform:scaleX(1)}90%{transform:scaleX(1);opacity:1}97%,100%{transform:scaleX(1);opacity:0}}
-.tag{animation:tag 10s ease infinite}
-@keyframes tag{0%,18%{opacity:0}24%{opacity:1}90%{opacity:1}97%,100%{opacity:0}}
-"""
-    return strip(t, "fig. 3 · seven routes scored, one best call", "\n".join(b), css,
-                 "Seven possible routes for a retired GPU server, scored as bars")
 
 
 def strip_lifeops(t):
@@ -251,7 +200,7 @@ def strip_lifeops(t):
 .blk{transform-box:fill-box;transform-origin:center top;animation:blk 10s cubic-bezier(.2,.9,.3,1.2) infinite both}
 @keyframes blk{0%{opacity:0;transform:translateY(-22px) scaleY(.6)}7%{opacity:.9;transform:none}84%{opacity:.9;transform:none}90%,100%{opacity:0;transform:none}}
 """
-    return strip(t, "fig. 4 · focus blocks packed around meetings (striped)", "\n".join(b), css,
+    return strip(t, "fig. 6 · focus blocks packed around meetings (striped)", "\n".join(b), css,
                  "A day timeline where focus blocks are scheduled around fixed meetings")
 
 
@@ -288,7 +237,7 @@ def strip_research(t):
 .lab{animation:lab 11s ease infinite}
 @keyframes lab{0%,22%{opacity:0}30%{opacity:1}86%{opacity:1}93%,100%{opacity:0}}
 """
-    return strip(t, "fig. 5 · search interest by term (stylized)", "\n".join(b), css,
+    return strip(t, "fig. 7 · search interest by term (stylized)", "\n".join(b), css,
                  "Four trend lines from 2015 to 2025 with burnout rising fastest")
 
 
@@ -315,7 +264,7 @@ def strip_fairclaim(t):
 .lk{stroke-dasharray:1;animation:lk 10s ease-in-out infinite both}
 @keyframes lk{0%{stroke-dashoffset:1;opacity:.75}12%{stroke-dashoffset:0}84%{stroke-dashoffset:0;opacity:.75}92%,100%{stroke-dashoffset:0;opacity:0}}
 """
-    return strip(t, "fig. 6 · workers matched to the right lawyer", "\n".join(b), css,
+    return strip(t, "fig. 8 · workers matched to the right lawyer", "\n".join(b), css,
                  "Workers on the left being connected to lawyers on the right")
 
 
@@ -337,10 +286,315 @@ def strip_play(t):
 .con{stroke-dasharray:1;animation:con 12s ease-in-out infinite both}
 @keyframes con{0%{stroke-dashoffset:1;opacity:.8}30%{stroke-dashoffset:0}86%{stroke-dashoffset:0;opacity:.8}94%,100%{stroke-dashoffset:0;opacity:0}}
 """
-    return strip(t, "fig. 7 · side quests", "\n".join(b), css, "A constellation being traced across a night sky")
+    return strip(t, "fig. 9 · side quests", "\n".join(b), css, "A constellation being traced across a night sky")
 
 
-# ------------------------------------------------------------ fig. 8 pipeline
+# ------------------------------------------------------------- highlights
+def highlights(t):
+    W, H = 840, 104
+    tiles = [
+        ("3rd", t["amber"], "Reverse the Future, ASU", "$3,000 prize, ReCompute"),
+        ("9M", t["accent"], "Reddit posts analyzed", "sole-author study"),
+        ("3.86", t["green"], "GPA at Arizona State", "Dean's List, every term"),
+        ("2", t["violet"], "internships so far:", "Blink Charging, Saxo Bank"),
+    ]
+    b = []
+    tw, gap = 201, 12
+    for i, (big, col, l1, l2) in enumerate(tiles):
+        x = i * (tw + gap)
+        b.append(f'<g class="tile" style="animation-delay:{i * 0.18:.2f}s">')
+        b.append(f'<rect x="{x + .5}" y=".5" width="{tw - 1}" height="{H - 1}" rx="12" fill="{t["bg"]}" stroke="{t["line"]}"/>')
+        b.append(f'<text x="{x + 18}" y="46" font-size="32" font-weight="800" letter-spacing="-1" fill="{col}">{big}</text>')
+        b.append(f'<text class="cap" x="{x + 18}" y="68" font-size="10.5" fill="{t["ink"]}">{esc(l1)}</text>')
+        b.append(f'<text class="cap" x="{x + 18}" y="84" font-size="10.5">{esc(l2)}</text>')
+        b.append(f'<rect class="glow" x="{x + 18}" y="96" width="{tw - 36}" height="2" rx="1" fill="{col}" style="animation-delay:{i * 0.5:.1f}s"/>')
+        b.append("</g>")
+    css = """
+.tile{animation:tile 1s cubic-bezier(.2,.8,.2,1) both}
+@keyframes tile{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:none}}
+.glow{transform-box:fill-box;transform-origin:left center;animation:glow 6s ease-in-out infinite}
+@keyframes glow{0%{transform:scaleX(0);opacity:.9}45%{transform:scaleX(1);opacity:.9}80%,100%{transform:scaleX(1);opacity:0}}
+"""
+    return svg(W, H, t, css, "\n".join(b),
+               "Highlights: 3rd place at ASU Reverse the Future with a $3,000 prize, 9 million Reddit posts analyzed, "
+               "3.86 GPA, two internships", frame=False)
+
+
+# ------------------------------------------------------- fig. 2 training log
+def training_log(t):
+    W, H = 840, 300
+    rng = random.Random(4)
+    x0, x1, y0, y1 = 58, 486, 66, 246
+    cps = [
+        (4, 0.22, "Saxo Bank", "Product Development Intern · May 2025", t["violet"]),
+        (6, 0.14, "Research assistant, ASU", "and joined The AI Society · Jul 2025", t["green"]),
+        (16, 0.26, "Blink Charging", "Data Science Intern · May 2026", t["accent"]),
+        (19, 0.10, "Academic Officer, AI Society", "and Instructional Aide · Fall 2026", t["pink"]),
+        (22, 0.13, "ReCompute takes 3rd place", "ASU Reverse the Future · Nov 2026", t["amber"]),
+    ]
+    span = 23.6
+
+    def L(m):
+        return 0.1 + sum(w * (1 - 1 / (1 + math.exp(-(m - c - 0.5) * 3.2))) for c, w, *_ in cps)
+
+    def X(m):
+        return x0 + m / span * (x1 - x0)
+
+    def Y(v):
+        return y1 - v * (y1 - y0)
+
+    b = [f'<text class="cap" x="28" y="30">fig. 2 · training log: loss over time, lower is better</text>']
+    for i in range(4):
+        y = y0 + i * (y1 - y0) / 3
+        b.append(f'<line x1="{x0}" y1="{r(y)}" x2="{x1}" y2="{r(y)}" stroke="{t["grid"]}"/>')
+    b.append(f'<path d="M{x0},{y0 - 8}V{y1}H{x1 + 8}" fill="none" stroke="{t["faint"]}"/>')
+    b.append(f'<text class="cap" x="{x0 - 10}" y="{y0 + 4}" font-size="10" text-anchor="end">1.0</text>')
+    b.append(f'<text class="cap" x="{x0 - 10}" y="{y1 + 3}" font-size="10" text-anchor="end">0.0</text>')
+    b.append(f'<text class="cap" transform="translate(24,{(y0 + y1) / 2 + 12}) rotate(-90)" font-size="10">loss</text>')
+    for m, lab in [(0, "Jan 2025"), (6, "Jul"), (12, "Jan 2026"), (18, "Jul"), (22.4, "now")]:
+        b.append(f'<line x1="{r(X(m))}" y1="{y1}" x2="{r(X(m))}" y2="{y1 + 4}" stroke="{t["faint"]}"/>')
+        b.append(f'<text class="cap" x="{r(X(m))}" y="{y1 + 18}" font-size="10" text-anchor="middle">{lab}</text>')
+    ms = [i * 0.2 for i in range(int(22.8 / 0.2) + 1)]
+    noisy = "M" + "L".join(f"{r(X(m))},{r(Y(L(m) + rng.gauss(0, 0.022)))}" for m in ms)
+    clean = "M" + "L".join(f"{r(X(m))},{r(Y(L(m)))}" for m in ms)
+    b.append(f'<path class="tr" pathLength="1" d="{noisy}" fill="none" stroke="{t["faint"]}" stroke-width="1.2"/>')
+    b.append(f'<path class="va" pathLength="1" d="{clean}" fill="none" stroke="{t["ink"]}" stroke-width="2.2" stroke-linecap="round"/>')
+    kx = 526
+    for i, (c, w, title, sub, col) in enumerate(cps):
+        mx = c + 1.5
+        d = 1.2 + c / 22.8 * 3.6
+        px, py = X(mx), Y(L(mx))
+        b.append(f'<g class="cp" style="animation-delay:{d:.2f}s">')
+        b.append(f'<line x1="{r(X(c + 0.5))}" y1="{y0 - 4}" x2="{r(X(c + 0.5))}" y2="{y1}" stroke="{col}" stroke-width="1" stroke-dasharray="2 4" opacity=".55"/>')
+        b.append(f'<circle cx="{r(px)}" cy="{r(py)}" r="9" fill="{t["bg"]}" stroke="{col}" stroke-width="1.8"/>')
+        b.append(f'<text class="m" x="{r(px)}" y="{r(py + 3.6)}" font-size="10" font-weight="700" text-anchor="middle" fill="{col}">{i + 1}</text>')
+        ky = 74 + i * 41
+        b.append(f'<circle cx="{kx + 9}" cy="{ky - 4}" r="9" fill="none" stroke="{col}" stroke-width="1.8"/>')
+        b.append(f'<text class="m" x="{kx + 9}" y="{ky - .4}" font-size="10" font-weight="700" text-anchor="middle" fill="{col}">{i + 1}</text>')
+        b.append(f'<text x="{kx + 28}" y="{ky - 5}" font-size="13.5" font-weight="700">{esc(title)}</text>')
+        b.append(f'<text class="cap" x="{kx + 28}" y="{ky + 10}" font-size="10.5">{esc(sub)}</text>')
+        b.append("</g>")
+    b.append(f'<text class="cap" x="{kx}" y="{H - 22}" font-size="10">checkpoint saved at every drop</text>')
+    css = """
+.va{stroke-dasharray:1;animation:va 18s ease-in-out infinite}
+.tr{stroke-dasharray:1;animation:va 18s ease-in-out infinite}
+@keyframes va{0%,4%{stroke-dashoffset:1;opacity:1}30%{stroke-dashoffset:0}92%{stroke-dashoffset:0;opacity:1}98%,100%{stroke-dashoffset:0;opacity:0}}
+.cp{animation:cp 18s ease infinite both}
+@keyframes cp{0%{opacity:0}3%{opacity:1}86%{opacity:1}92%,100%{opacity:0}}
+"""
+    return svg(W, H, t, css, "\n".join(b),
+               "A training loss curve that drops at five checkpoints: Saxo Bank internship, ASU research and The AI Society, "
+               "Blink Charging internship, Academic Officer and Instructional Aide, and ReCompute taking 3rd place")
+
+
+# ------------------------------------------------- fig. 3 blink: log to verdict
+def blink_decode(t):
+    W, H = 840, 330
+    b = [f'<text class="cap" x="28" y="30">fig. 3 · one charging visit, from raw log to verdict (synthetic example)</text>']
+    py, ph = 48, 258
+    panels = [(28, 270, "01", "raw OCPP 1.6 stream"), (312, 238, "02", "128-bit vendor fault field"), (564, 248, "03", "one visit, one verdict")]
+    for x, w, num, name in panels:
+        b.append(f'<rect x="{x}" y="{py}" width="{w}" height="{ph}" rx="10" fill="{t["panel"]}" stroke="{t["line"]}"/>')
+        b.append(f'<text class="m" x="{x + 16}" y="{py + 24}" font-size="10.5" fill="{t["accent"]}">{num}<tspan fill="{t["mute"]}"> · {name}</tspan></text>')
+    for ax in (298, 550):
+        b.append(f'<path d="M{ax + 2},{py + ph / 2}h10" stroke="{t["faint"]}" stroke-width="1.4" stroke-linecap="round"/>')
+        b.append(f'<circle class="flow" cx="{ax + 2}" cy="{py + ph / 2}" r="2.4" fill="{t["accent"]}"/>')
+    # 01 log lines
+    lines = [
+        ("09:14:02", "StatusNotification", "Preparing", None),
+        ("09:14:09", "Authorize", "Accepted", None),
+        ("09:14:11", "StartTransaction", "tx 48213", None),
+        ("09:14:41", "MeterValues", "0.4 kWh", None),
+        ("09:15:10", "MeterValues", "1.1 kWh", None),
+        ("09:15:26", "StatusNotification", "Faulted", t["pink"]),
+        ("", "vendorErrorCode", "0x…", t["pink"]),
+        ("09:15:27", "StopTransaction", "queued", t["amber"]),
+        ("09:21:40", "StatusNotification", "Available", None),
+        ("09:21:44", "StatusNotification", "Preparing", None),
+    ]
+    lx = 44
+    for i, (ts, msg, val, col) in enumerate(lines):
+        y = py + 52 + i * 19.5
+        c = col or t["ink"]
+        b.append(
+            f'<text class="m ll" font-size="10" style="animation-delay:{0.3 + i * 0.42:.2f}s">'
+            f'<tspan x="{lx}" y="{r(y)}" fill="{t["mute"]}">{ts}</tspan>'
+            f'<tspan x="{lx + 56}" y="{r(y)}" fill="{c}">{msg}</tspan>'
+            f'<tspan x="{lx + 242}" y="{r(y)}" text-anchor="end" fill="{c if col else t["mute"]}">{esc(val)}</tspan></text>'
+        )
+    # 02 bitfield
+    bits = {37: (t["pink"], "ground fault"), 82: (t["amber"], "contactor check failed")}
+    value = sum(1 << k for k in bits)
+    hx = f"{value:032x}"
+    gx, gy, cs, cg = 328, py + 62, 10, 3.4
+    b.append(f'<text class="m" x="{gx}" y="{py + 48}" font-size="9" fill="{t["mute"]}">0x {hx[:8]} {hx[8:16]} {hx[16:24]} {hx[24:]}</text>')
+    for k in range(128):
+        col_i, row_i = k % 16, k // 16
+        x, y = gx + col_i * (cs + cg), gy + row_i * (cs + cg)
+        b.append(f'<rect x="{r(x)}" y="{r(y)}" width="{cs}" height="{cs}" rx="2" fill="{t["line"]}"/>')
+        if k in bits:
+            b.append(f'<rect class="bit" x="{r(x)}" y="{r(y)}" width="{cs}" height="{cs}" rx="2" fill="{bits[k][0]}"/>')
+            b.append(f'<rect class="halo" x="{r(x - 3)}" y="{r(y - 3)}" width="{cs + 6}" height="{cs + 6}" rx="4" fill="none" stroke="{bits[k][0]}"/>')
+    b.append(f'<rect class="sweep" x="{gx - 2}" y="{gy - 3}" width="2" height="{8 * (cs + cg) + 2}" rx="1" fill="{t["accent"]}"/>')
+    dy = gy + 8 * (cs + cg) + 20
+    for j, (k, (col, name)) in enumerate(sorted(bits.items())):
+        b.append(f'<g class="dec" style="animation-delay:{5.2 + j * 0.5:.1f}s"><rect x="{gx}" y="{dy + j * 20 - 9}" width="10" height="10" rx="2" fill="{col}"/>'
+                 f'<text class="m" x="{gx + 18}" y="{dy + j * 20}" font-size="10.5">bit {k} <tspan fill="{t["mute"]}">→</tspan> {name}</text></g>')
+    b.append(f'<text class="cap" x="{gx}" y="{py + ph - 14}" font-size="9.5">bit names are illustrative</text>')
+    # 03 verdict
+    cats = ["Success", "ZeroEnergy", "InterruptedFault", "FaultedPrecharge", "OrphanTransaction",
+            "InProgress", "AuthDenied", "AuthNoStart", "AuthNoPlug", "PluggedNoAuth"]
+    vx = 580
+    for i, name in enumerate(cats):
+        y = py + 54 + i * 18.6
+        hit = name == "InterruptedFault"
+        if hit:
+            b.append(f'<rect class="hit" x="{vx - 6}" y="{r(y - 12.5)}" width="{248 - 20}" height="17.5" rx="5" fill="{t["pink"]}" opacity=".16"/>')
+            b.append(f'<rect class="hit" x="{vx - 6}" y="{r(y - 12.5)}" width="3" height="17.5" rx="1.5" fill="{t["pink"]}"/>')
+        b.append(f'<text class="m" x="{vx + 6}" y="{r(y)}" font-size="10.5" fill="{t["ink"] if hit else t["mute"]}">{name}</text>')
+        if hit:
+            b.append(f'<text class="m hit" x="{vx + 216}" y="{r(y)}" font-size="10" text-anchor="end" fill="{t["pink"]}">verdict</text>')
+    b.append(f'<text class="cap" x="{vx}" y="{py + ph - 14}" font-size="9.5">exactly one outcome per visit</text>')
+    css = """
+.ll{animation:ll 14s ease infinite both}
+@keyframes ll{0%{opacity:0}2%{opacity:1}90%{opacity:1}96%,100%{opacity:0}}
+.sweep{animation:sweep 14s ease-in-out infinite}
+@keyframes sweep{0%,26%{transform:translateX(0);opacity:0}28%{opacity:1}38%{transform:translateX(216px);opacity:1}40%,100%{transform:translateX(216px);opacity:0}}
+.bit{animation:bit 14s ease infinite}
+@keyframes bit{0%,32%{opacity:0}37%{opacity:1}90%{opacity:1}96%,100%{opacity:0}}
+.halo{opacity:0;transform-box:fill-box;transform-origin:center;animation:halo 14s ease-out infinite}
+@keyframes halo{0%,36%{opacity:0;transform:scale(.6)}40%{opacity:.9;transform:scale(1)}52%{opacity:0;transform:scale(1.9)}100%{opacity:0}}
+.dec{animation:ll 14s ease infinite both}
+.hit{animation:hit 14s ease infinite}
+@keyframes hit{0%,46%{opacity:0}52%{opacity:1}90%{opacity:1}96%,100%{opacity:0}}
+rect.hit{animation-name:hitbg}
+@keyframes hitbg{0%,46%{opacity:0}52%{opacity:.16}90%{opacity:.16}96%,100%{opacity:0}}
+rect.hit + rect.hit{animation-name:hit}
+.flow{animation:flow 2.2s ease-in-out infinite}
+@keyframes flow{0%{transform:translateX(0);opacity:0}20%{opacity:1}80%{opacity:1}100%{transform:translateX(10px);opacity:0}}
+"""
+    return svg(W, H, t, css, "\n".join(b),
+               "A synthetic charging visit moving through three stages: a raw OCPP message stream, a 128-bit vendor fault "
+               "field being decoded into named faults, and a ten-category classifier giving the visit one verdict")
+
+
+# ---------------------------------------------- fig. 4 blink: energy and cost
+def blink_energy(t):
+    W, H = 840, 252
+    rng = random.Random(9)
+    b = [f'<text class="cap" x="28" y="30">fig. 4 · when a site draws power, and what the peaks cost (synthetic data)</text>']
+    gx, gy, cw, ch, g = 70, 56, 18.5, 17, 3
+    days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+    for d, name in enumerate(days):
+        b.append(f'<text class="cap" x="{gx - 10}" y="{r(gy + d * (ch + g) + 12)}" font-size="10" text-anchor="end">{name}</text>')
+        for h in range(24):
+            if d < 5:
+                v = 0.08 + 0.75 * math.exp(-((h - 8) ** 2) / 5) + 0.95 * math.exp(-((h - 18) ** 2) / 7) + 0.18 * math.exp(-((h - 13) ** 2) / 10)
+            else:
+                v = 0.08 + 0.7 * math.exp(-((h - 13.5) ** 2) / 16)
+            v = max(0.05, min(1, v + rng.uniform(-0.07, 0.07)))
+            x, y = gx + h * (cw + g), gy + d * (ch + g)
+            b.append(f'<rect x="{r(x)}" y="{r(y)}" width="{cw}" height="{ch}" rx="3" fill="{t["line"]}"/>')
+            b.append(f'<rect class="hm" x="{r(x)}" y="{r(y)}" width="{cw}" height="{ch}" rx="3" fill="{t["accent"]}" opacity="{v:.2f}" style="animation-delay:{h * 0.09:.2f}s"/>')
+    for h, lab in [(0, "12a"), (6, "6a"), (12, "12p"), (18, "6p"), (23, "11p")]:
+        b.append(f'<text class="cap" x="{r(gx + h * (cw + g) + cw / 2)}" y="{gy + 7 * (ch + g) + 14}" font-size="10" text-anchor="middle">{lab}</text>')
+    px = gx + 18 * (cw + g) - 2
+    b.append(f'<rect class="pk" x="{r(px)}" y="{gy - 4}" width="{r(cw + 4)}" height="{5 * (ch + g) + 5}" rx="5" fill="none" stroke="{t["amber"]}" stroke-width="1.6"/>')
+    b.append(f'<text class="m pk" x="{r(px + cw / 2 + 2)}" y="{gy + 7 * (ch + g) + 32}" font-size="10" text-anchor="middle" fill="{t["amber"]}">site peak</text>')
+    # cost split
+    sx = 616
+    b.append(f'<text class="cap" x="{sx}" y="66" font-size="10.5" fill="{t["ink"]}">monthly cost split</text>')
+    for i, (site, e, note) in enumerate([("site A", 0.72, ""), ("site B", 0.34, "peak shaving pays here")]):
+        y = 84 + i * 62
+        wtot = 196
+        b.append(f'<text class="cap" x="{sx}" y="{y + 10}" font-size="10">{site}</text>')
+        b.append(f'<rect class="cs" x="{sx}" y="{y + 18}" width="{r(wtot * e)}" height="14" rx="3" fill="{t["faint"]}"/>')
+        b.append(f'<rect class="cs" x="{r(sx + wtot * e + 2)}" y="{y + 18}" width="{r(wtot * (1 - e) - 2)}" height="14" rx="3" fill="{t["amber"]}" style="animation-delay:.25s"/>')
+        if note:
+            b.append(f'<text class="m pk" x="{sx}" y="{y + 48}" font-size="10" fill="{t["amber"]}">{note}</text>')
+    b.append(f'<rect x="{sx}" y="214" width="8" height="8" rx="2" fill="{t["faint"]}"/><text class="cap" x="{sx + 13}" y="222" font-size="10">energy</text>')
+    b.append(f'<rect x="{sx + 66}" y="214" width="8" height="8" rx="2" fill="{t["amber"]}"/><text class="cap" x="{sx + 79}" y="222" font-size="10">demand charges</text>')
+    css = """
+.hm{animation:hm 12s ease infinite both}
+@keyframes hm{0%{fill-opacity:0}6%{fill-opacity:1}88%{fill-opacity:1}95%,100%{fill-opacity:0}}
+.pk{animation:pk 12s ease infinite}
+@keyframes pk{0%,26%{opacity:0}32%{opacity:1}88%{opacity:1}95%,100%{opacity:0}}
+.cs{transform-box:fill-box;transform-origin:left center;animation:cs 12s cubic-bezier(.2,.8,.2,1) infinite}
+@keyframes cs{0%,22%{transform:scaleX(0)}34%{transform:scaleX(1)}88%{transform:scaleX(1);opacity:1}95%,100%{transform:scaleX(1);opacity:0}}
+"""
+    return svg(W, H, t, css, "\n".join(b),
+               "A weekday by hour heatmap of site power demand with the evening peak outlined, next to a cost split showing "
+               "a site where demand charges dominate the bill")
+
+
+# -------------------------------------------------- fig. 5 recompute fleet
+def recompute_fleet(t):
+    W, H = 840, 318
+    rng = random.Random(49)
+    b = [f'<text class="cap" x="28" y="30">fig. 5 · ReCompute: a 100-server test fleet, every machine routed</text>']
+    gx, gy, cs, cg = 34, 54, 17, 5
+    routes = [("host longer", t["accent"], 21), ("rent while listed", t["violet"], 12), ("repair", t["green"], 9), ("harvest parts", t["pink"], 7)]
+    cells = list(range(100))
+    rng.shuffle(cells)
+    assign, k = {}, 0
+    for name, col, n in routes:
+        for c in cells[k:k + n]:
+            assign[c] = col
+        k += n
+    assert len(assign) == 49
+    for c in range(100):
+        x, y = gx + (c % 10) * (cs + cg), gy + (c // 10) * (cs + cg)
+        b.append(f'<rect x="{x}" y="{y}" width="{cs}" height="{cs}" rx="4" fill="{t["faint"]}"/>')
+        b.append(f'<rect x="{x + 4}" y="{y + 5}" width="{cs - 8}" height="1.6" rx=".8" fill="{t["bg"]}" opacity=".55"/>')
+        b.append(f'<rect x="{x + 4}" y="{y + 10}" width="{cs - 8}" height="1.6" rx=".8" fill="{t["bg"]}" opacity=".55"/>')
+        if c in assign:
+            d = 1.2 + (c % 10 + c // 10) * 0.16 + rng.random() * 0.3
+            b.append(f'<rect class="rr" x="{x}" y="{y}" width="{cs}" height="{cs}" rx="4" fill="{assign[c]}" style="animation-delay:{d:.2f}s"/>')
+    by = gy + 10 * (cs + cg) + 14
+    b.append(f'<text class="cap" x="{gx}" y="{by}" font-size="10.5" fill="{t["ink"]}">49 of 100 rerouted</text>')
+    b.append(f'<text class="cap" x="{gx}" y="{by + 15}" font-size="9.5">grey = default route kept · route mix illustrative</text>')
+    # route key with bars
+    kx = 292
+    b.append(f'<text class="cap" x="{kx}" y="66" font-size="10.5" fill="{t["ink"]}">seven routes per machine</text>')
+    allr = [("sell now", t["faint"], 0.5), ("list and wait", t["faint"], 0.58), ("rent while listed", t["violet"], 0.74),
+            ("host longer", t["accent"], 0.95), ("repair", t["green"], 0.62), ("harvest parts", t["pink"], 0.44), ("recycle", t["faint"], 0.16)]
+    for i, (name, col, v) in enumerate(allr):
+        y = 82 + i * 22
+        b.append(f'<text class="m" x="{kx}" y="{y + 9}" font-size="10.5" fill="{t["mute"]}">{name}</text>')
+        b.append(f'<rect x="{kx + 122}" y="{y}" width="130" height="10" rx="3" fill="{t["line"]}"/>')
+        b.append(f'<rect class="rb" x="{kx + 122}" y="{y}" width="{r(130 * v)}" height="10" rx="3" fill="{col}" style="animation-delay:{0.3 + i * 0.1:.1f}s"/>')
+    b.append(f'<text class="cap" x="{kx}" y="{82 + 7 * 22 + 12}" font-size="9.5">each one stress-tested: bear, base, bull</text>')
+    # result card
+    rx_, rw = 580, 232
+    b.append(f'<rect x="{rx_}" y="50" width="{rw}" height="248" rx="12" fill="{t["panel"]}" stroke="{t["line"]}"/>')
+    mx, my = rx_ + 40, 104
+    b.append(f'<path d="M{mx - 13},{my + 12}l-7,34 20,-10 20,10 -7,-34z" fill="{t["amber"]}" opacity=".45"/>')
+    b.append(f'<circle class="medal" cx="{mx}" cy="{my}" r="23" fill="{t["bg"]}" stroke="{t["amber"]}" stroke-width="2.6"/>')
+    b.append(f'<circle cx="{mx}" cy="{my}" r="17" fill="none" stroke="{t["amber"]}" stroke-width="1" stroke-dasharray="2 3"/>')
+    b.append(f'<text x="{mx}" y="{my + 8}" font-size="23" font-weight="800" text-anchor="middle" fill="{t["amber"]}">3</text>')
+    b.append(f'<text x="{mx + 32}" y="{my - 6}" font-size="18" font-weight="800">3rd place</text>')
+    b.append(f'<text class="cap" x="{mx + 32}" y="{my + 11}" font-size="9.5">ASU Reverse the Future</text>')
+    b.append(f'<text class="cap" x="{mx + 32}" y="{my + 25}" font-size="9.5" fill="{t["amber"]}">$3,000 prize · 2026</text>')
+    b.append(f'<line x1="{rx_ + 20}" y1="170" x2="{rx_ + rw - 20}" y2="170" stroke="{t["line"]}"/>')
+    b.append(f'<text x="{rx_ + 20}" y="218" font-size="40" font-weight="800" letter-spacing="-1.5" fill="{t["accent"]}">+6.3%</text>')
+    b.append(f'<text class="cap" x="{rx_ + 20}" y="240" font-size="10.5" fill="{t["ink"]}">modeled fleet value</text>')
+    b.append(f'<text class="cap" x="{rx_ + 20}" y="256" font-size="10.5">vs. the default routes,</text>')
+    b.append(f'<text class="cap" x="{rx_ + 20}" y="272" font-size="10.5">$500K+ on 100 servers</text>')
+    css = """
+.rr{transform-box:fill-box;transform-origin:center;animation:rr 13s cubic-bezier(.3,1.4,.5,1) infinite both}
+@keyframes rr{0%{opacity:0;transform:scale(.3) rotate(-90deg)}5%{opacity:1;transform:none}88%{opacity:1;transform:none}95%,100%{opacity:0;transform:none}}
+.rb{transform-box:fill-box;transform-origin:left center;animation:rb 13s cubic-bezier(.2,.8,.2,1) infinite both}
+@keyframes rb{0%{transform:scaleX(0)}10%{transform:scaleX(1)}88%{transform:scaleX(1);opacity:1}95%,100%{transform:scaleX(1);opacity:0}}
+.medal{animation:medal 3s ease-in-out infinite}
+@keyframes medal{0%,100%{stroke-opacity:1}50%{stroke-opacity:.45}}
+"""
+    return svg(W, H, t, css, "\n".join(b),
+               "ReCompute: a grid of 100 retired GPU servers where 49 are rerouted to better routes, seven routes scored per "
+               "machine, 6.3 percent more modeled value, and a 3rd place medal from ASU Reverse the Future with a $3,000 prize")
+
+
+
+# ------------------------------------------------------------ pipeline
 def pipeline(t):
     W, H = 840, 214
     stages = [
@@ -349,7 +603,7 @@ def pipeline(t):
         ("03", "serve", t["green"], ["FastAPI", "SQLAlchemy", "REST", "Firebase", "Docker"]),
         ("04", "show", t["amber"], ["React", "TypeScript", "Power BI", "Three.js", "Figma"]),
     ]
-    b = [f'<text class="cap" x="28" y="30">fig. 8 · the stack, in the order data moves through it</text>']
+    b = [f'<text class="cap" x="28" y="30">fig. 10 · the stack, in the order data moves through it</text>']
     bw, gap, x = 176, 26, 28
     cy = 76
     xs = []
@@ -377,7 +631,7 @@ def pipeline(t):
                "Serve with FastAPI, SQLAlchemy, Firebase, Docker. Show with React, TypeScript, Power BI, Three.js, Figma.")
 
 
-# ------------------------------------------------------------ fig. 9 activity
+# ------------------------------------------------------------ activity
 def fetch_calendar(login, token):
     q = ("query($l:String!){user(login:$l){contributionsCollection{contributionCalendar{"
          "totalContributions weeks{contributionDays{date contributionCount}}}}}}")
@@ -395,7 +649,7 @@ def fetch_calendar(login, token):
 
 def activity(t, days):
     W, H = 840, 236
-    b = [f'<text class="cap" x="28" y="30">fig. 9 · commit signal, last 12 months · redrawn nightly by scripts/build.py</text>']
+    b = [f'<text class="cap" x="28" y="30">commit signal, last 12 months · redrawn nightly by scripts/build.py</text>']
     if not days:
         b.append(f'<path d="M40,150H800" stroke="{t["faint"]}" stroke-dasharray="3 6"/>')
         b.append(f'<text x="420" y="122" font-size="14" text-anchor="middle" fill="{t["mute"]}">Waiting for the first sync.</text>')
@@ -477,8 +731,10 @@ def activity(t, days):
 def main():
     OUT.mkdir(exist_ok=True)
     figs = {
-        "hero": hero, "blink": strip_blink, "recompute": strip_recompute, "lifeops": strip_lifeops,
-        "research": strip_research, "fairclaim": strip_fairclaim, "play": strip_play, "pipeline": pipeline,
+        "hero": hero, "highlights": highlights, "training": training_log,
+        "blink-decode": blink_decode, "blink-energy": blink_energy, "recompute": recompute_fleet,
+        "lifeops": strip_lifeops, "research": strip_research, "fairclaim": strip_fairclaim, "play": strip_play,
+        "pipeline": pipeline,
     }
     for name, fn in figs.items():
         for mode, t in THEMES.items():

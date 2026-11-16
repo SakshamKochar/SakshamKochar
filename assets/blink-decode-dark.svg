@@ -1,0 +1,199 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 330" width="840" height="330" fill="#e6edf3" role="img" aria-label="A synthetic charging visit moving through three stages: a raw OCPP message stream, a 128-bit vendor fault field being decoded into named faults, and a ten-category classifier giving the visit one verdict">
+<title>A synthetic charging visit moving through three stages: a raw OCPP message stream, a 128-bit vendor fault field being decoded into named faults, and a ten-category classifier giving the visit one verdict</title>
+<style>
+text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif}
+.m{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace}
+.cap{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace;font-size:11px;letter-spacing:.3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+
+.ll{animation:ll 14s ease infinite both}
+@keyframes ll{0%{opacity:0}2%{opacity:1}90%{opacity:1}96%,100%{opacity:0}}
+.sweep{animation:sweep 14s ease-in-out infinite}
+@keyframes sweep{0%,26%{transform:translateX(0);opacity:0}28%{opacity:1}38%{transform:translateX(216px);opacity:1}40%,100%{transform:translateX(216px);opacity:0}}
+.bit{animation:bit 14s ease infinite}
+@keyframes bit{0%,32%{opacity:0}37%{opacity:1}90%{opacity:1}96%,100%{opacity:0}}
+.halo{opacity:0;transform-box:fill-box;transform-origin:center;animation:halo 14s ease-out infinite}
+@keyframes halo{0%,36%{opacity:0;transform:scale(.6)}40%{opacity:.9;transform:scale(1)}52%{opacity:0;transform:scale(1.9)}100%{opacity:0}}
+.dec{animation:ll 14s ease infinite both}
+.hit{animation:hit 14s ease infinite}
+@keyframes hit{0%,46%{opacity:0}52%{opacity:1}90%{opacity:1}96%,100%{opacity:0}}
+rect.hit{animation-name:hitbg}
+@keyframes hitbg{0%,46%{opacity:0}52%{opacity:.16}90%{opacity:.16}96%,100%{opacity:0}}
+rect.hit + rect.hit{animation-name:hit}
+.flow{animation:flow 2.2s ease-in-out infinite}
+@keyframes flow{0%{transform:translateX(0);opacity:0}20%{opacity:1}80%{opacity:1}100%{transform:translateX(10px);opacity:0}}
+</style>
+<rect x=".5" y=".5" width="839" height="329" rx="14" fill="#07090d" stroke="#1b2430"/>
+<text class="cap" fill="#7d8796" x="28" y="30">fig. 3 · one charging visit, from raw log to verdict (synthetic example)</text>
+<rect x="28" y="48" width="270" height="258" rx="10" fill="#0c1118" stroke="#1b2430"/>
+<text class="m" x="44" y="72" font-size="10.5" fill="#00e1ff">01<tspan fill="#7d8796"> · raw OCPP 1.6 stream</tspan></text>
+<rect x="312" y="48" width="238" height="258" rx="10" fill="#0c1118" stroke="#1b2430"/>
+<text class="m" x="328" y="72" font-size="10.5" fill="#00e1ff">02<tspan fill="#7d8796"> · 128-bit vendor fault field</tspan></text>
+<rect x="564" y="48" width="248" height="258" rx="10" fill="#0c1118" stroke="#1b2430"/>
+<text class="m" x="580" y="72" font-size="10.5" fill="#00e1ff">03<tspan fill="#7d8796"> · one visit, one verdict</tspan></text>
+<path d="M300,177.0h10" stroke="#3a4553" stroke-width="1.4" stroke-linecap="round"/>
+<circle class="flow" cx="300" cy="177.0" r="2.4" fill="#00e1ff"/>
+<path d="M552,177.0h10" stroke="#3a4553" stroke-width="1.4" stroke-linecap="round"/>
+<circle class="flow" cx="552" cy="177.0" r="2.4" fill="#00e1ff"/>
+<text class="m ll" font-size="10" style="animation-delay:0.30s"><tspan x="44" y="100" fill="#7d8796">09:14:02</tspan><tspan x="100" y="100" fill="#e6edf3">StatusNotification</tspan><tspan x="286" y="100" text-anchor="end" fill="#7d8796">Preparing</tspan></text>
+<text class="m ll" font-size="10" style="animation-delay:0.72s"><tspan x="44" y="119.5" fill="#7d8796">09:14:09</tspan><tspan x="100" y="119.5" fill="#e6edf3">Authorize</tspan><tspan x="286" y="119.5" text-anchor="end" fill="#7d8796">Accepted</tspan></text>
+<text class="m ll" font-size="10" style="animation-delay:1.14s"><tspan x="44" y="139" fill="#7d8796">09:14:11</tspan><tspan x="100" y="139" fill="#e6edf3">StartTransaction</tspan><tspan x="286" y="139" text-anchor="end" fill="#7d8796">tx 48213</tspan></text>
+<text class="m ll" font-size="10" style="animation-delay:1.56s"><tspan x="44" y="158.5" fill="#7d8796">09:14:41</tspan><tspan x="100" y="158.5" fill="#e6edf3">MeterValues</tspan><tspan x="286" y="158.5" text-anchor="end" fill="#7d8796">0.4 kWh</tspan></text>
+<text class="m ll" font-size="10" style="animation-delay:1.98s"><tspan x="44" y="178" fill="#7d8796">09:15:10</tspan><tspan x="100" y="178" fill="#e6edf3">MeterValues</tspan><tspan x="286" y="178" text-anchor="end" fill="#7d8796">1.1 kWh</tspan></text>
+<text class="m ll" font-size="10" style="animation-delay:2.40s"><tspan x="44" y="197.5" fill="#7d8796">09:15:26</tspan><tspan x="100" y="197.5" fill="#ff6b9a">StatusNotification</tspan><tspan x="286" y="197.5" text-anchor="end" fill="#ff6b9a">Faulted</tspan></text>
+<text class="m ll" font-size="10" style="animation-delay:2.82s"><tspan x="44" y="217" fill="#7d8796"></tspan><tspan x="100" y="217" fill="#ff6b9a">vendorErrorCode</tspan><tspan x="286" y="217" text-anchor="end" fill="#ff6b9a">0x…</tspan></text>
+<text class="m ll" font-size="10" style="animation-delay:3.24s"><tspan x="44" y="236.5" fill="#7d8796">09:15:27</tspan><tspan x="100" y="236.5" fill="#ffb454">StopTransaction</tspan><tspan x="286" y="236.5" text-anchor="end" fill="#ffb454">queued</tspan></text>
+<text class="m ll" font-size="10" style="animation-delay:3.66s"><tspan x="44" y="256" fill="#7d8796">09:21:40</tspan><tspan x="100" y="256" fill="#e6edf3">StatusNotification</tspan><tspan x="286" y="256" text-anchor="end" fill="#7d8796">Available</tspan></text>
+<text class="m ll" font-size="10" style="animation-delay:4.08s"><tspan x="44" y="275.5" fill="#7d8796">09:21:44</tspan><tspan x="100" y="275.5" fill="#e6edf3">StatusNotification</tspan><tspan x="286" y="275.5" text-anchor="end" fill="#7d8796">Preparing</tspan></text>
+<text class="m" x="328" y="96" font-size="9" fill="#7d8796">0x 00000000 00040000 00000020 00000000</text>
+<rect x="328" y="110" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="341.4" y="110" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="354.8" y="110" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="368.2" y="110" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="381.6" y="110" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="395" y="110" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="408.4" y="110" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="421.8" y="110" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="435.2" y="110" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="448.6" y="110" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="462" y="110" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="475.4" y="110" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="488.8" y="110" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="502.2" y="110" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="515.6" y="110" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="529" y="110" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="328" y="123.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="341.4" y="123.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="354.8" y="123.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="368.2" y="123.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="381.6" y="123.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="395" y="123.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="408.4" y="123.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="421.8" y="123.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="435.2" y="123.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="448.6" y="123.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="462" y="123.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="475.4" y="123.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="488.8" y="123.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="502.2" y="123.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="515.6" y="123.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="529" y="123.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="328" y="136.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="341.4" y="136.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="354.8" y="136.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="368.2" y="136.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="381.6" y="136.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="395" y="136.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect class="bit" x="395" y="136.8" width="10" height="10" rx="2" fill="#ff6b9a"/>
+<rect class="halo" x="392" y="133.8" width="16" height="16" rx="4" fill="none" stroke="#ff6b9a"/>
+<rect x="408.4" y="136.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="421.8" y="136.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="435.2" y="136.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="448.6" y="136.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="462" y="136.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="475.4" y="136.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="488.8" y="136.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="502.2" y="136.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="515.6" y="136.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="529" y="136.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="328" y="150.2" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="341.4" y="150.2" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="354.8" y="150.2" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="368.2" y="150.2" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="381.6" y="150.2" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="395" y="150.2" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="408.4" y="150.2" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="421.8" y="150.2" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="435.2" y="150.2" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="448.6" y="150.2" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="462" y="150.2" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="475.4" y="150.2" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="488.8" y="150.2" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="502.2" y="150.2" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="515.6" y="150.2" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="529" y="150.2" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="328" y="163.6" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="341.4" y="163.6" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="354.8" y="163.6" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="368.2" y="163.6" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="381.6" y="163.6" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="395" y="163.6" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="408.4" y="163.6" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="421.8" y="163.6" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="435.2" y="163.6" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="448.6" y="163.6" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="462" y="163.6" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="475.4" y="163.6" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="488.8" y="163.6" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="502.2" y="163.6" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="515.6" y="163.6" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="529" y="163.6" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="328" y="177" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="341.4" y="177" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="354.8" y="177" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect class="bit" x="354.8" y="177" width="10" height="10" rx="2" fill="#ffb454"/>
+<rect class="halo" x="351.8" y="174" width="16" height="16" rx="4" fill="none" stroke="#ffb454"/>
+<rect x="368.2" y="177" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="381.6" y="177" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="395" y="177" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="408.4" y="177" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="421.8" y="177" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="435.2" y="177" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="448.6" y="177" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="462" y="177" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="475.4" y="177" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="488.8" y="177" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="502.2" y="177" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="515.6" y="177" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="529" y="177" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="328" y="190.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="341.4" y="190.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="354.8" y="190.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="368.2" y="190.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="381.6" y="190.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="395" y="190.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="408.4" y="190.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="421.8" y="190.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="435.2" y="190.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="448.6" y="190.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="462" y="190.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="475.4" y="190.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="488.8" y="190.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="502.2" y="190.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="515.6" y="190.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="529" y="190.4" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="328" y="203.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="341.4" y="203.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="354.8" y="203.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="368.2" y="203.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="381.6" y="203.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="395" y="203.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="408.4" y="203.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="421.8" y="203.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="435.2" y="203.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="448.6" y="203.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="462" y="203.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="475.4" y="203.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="488.8" y="203.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="502.2" y="203.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="515.6" y="203.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect x="529" y="203.8" width="10" height="10" rx="2" fill="#1b2430"/>
+<rect class="sweep" x="326" y="107" width="2" height="109.2" rx="1" fill="#00e1ff"/>
+<g class="dec" style="animation-delay:5.2s"><rect x="328" y="228.2" width="10" height="10" rx="2" fill="#ff6b9a"/><text class="m" x="346" y="237.2" font-size="10.5">bit 37 <tspan fill="#7d8796">→</tspan> ground fault</text></g>
+<g class="dec" style="animation-delay:5.7s"><rect x="328" y="248.2" width="10" height="10" rx="2" fill="#ffb454"/><text class="m" x="346" y="257.2" font-size="10.5">bit 82 <tspan fill="#7d8796">→</tspan> contactor check failed</text></g>
+<text class="cap" fill="#7d8796" x="328" y="292" font-size="9.5">bit names are illustrative</text>
+<text class="m" x="586" y="102" font-size="10.5" fill="#7d8796">Success</text>
+<text class="m" x="586" y="120.6" font-size="10.5" fill="#7d8796">ZeroEnergy</text>
+<rect class="hit" x="574" y="126.7" width="228" height="17.5" rx="5" fill="#ff6b9a" opacity=".16"/>
+<rect class="hit" x="574" y="126.7" width="3" height="17.5" rx="1.5" fill="#ff6b9a"/>
+<text class="m" x="586" y="139.2" font-size="10.5" fill="#e6edf3">InterruptedFault</text>
+<text class="m hit" x="796" y="139.2" font-size="10" text-anchor="end" fill="#ff6b9a">verdict</text>
+<text class="m" x="586" y="157.8" font-size="10.5" fill="#7d8796">FaultedPrecharge</text>
+<text class="m" x="586" y="176.4" font-size="10.5" fill="#7d8796">OrphanTransaction</text>
+<text class="m" x="586" y="195" font-size="10.5" fill="#7d8796">InProgress</text>
+<text class="m" x="586" y="213.6" font-size="10.5" fill="#7d8796">AuthDenied</text>
+<text class="m" x="586" y="232.2" font-size="10.5" fill="#7d8796">AuthNoStart</text>
+<text class="m" x="586" y="250.8" font-size="10.5" fill="#7d8796">AuthNoPlug</text>
+<text class="m" x="586" y="269.4" font-size="10.5" fill="#7d8796">PluggedNoAuth</text>
+<text class="cap" fill="#7d8796" x="580" y="292" font-size="9.5">exactly one outcome per visit</text>
+</svg>

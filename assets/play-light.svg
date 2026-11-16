@@ -1,10 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 132" width="420" height="132" role="img" aria-label="A constellation being traced across a night sky">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 132" width="420" height="132" fill="#0d1117" role="img" aria-label="A constellation being traced across a night sky">
 <title>A constellation being traced across a night sky</title>
 <style>
-text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif;fill:#0d1117}
+text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif}
 .m{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace}
-.cap{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace;font-size:11px;fill:#57606a;letter-spacing:.3px}
-.dim{fill:#57606a}
+.cap{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace;font-size:11px;letter-spacing:.3px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 
 .tw{animation:tw 4s ease-in-out infinite}
@@ -13,7 +12,7 @@ text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helveti
 @keyframes con{0%{stroke-dashoffset:1;opacity:.8}30%{stroke-dashoffset:0}86%{stroke-dashoffset:0;opacity:.8}94%,100%{stroke-dashoffset:0;opacity:0}}
 </style>
 <rect x=".5" y=".5" width="419" height="131" rx="14" fill="#ffffff" stroke="#d5dbe3"/>
-<text class="cap" x="18" y="24">fig. 7 · side quests</text>
+<text class="cap" fill="#57606a" x="18" y="24">fig. 9 · side quests</text>
 <circle class="tw" cx="191.3" cy="83.3" r="0.9" fill="#57606a" style="animation-delay:1.8s"/>
 <circle class="tw" cx="349.2" cy="50.7" r="1.2" fill="#57606a" style="animation-delay:1.9s"/>
 <circle class="tw" cx="254.7" cy="50.4" r="0.9" fill="#57606a" style="animation-delay:1.2s"/>

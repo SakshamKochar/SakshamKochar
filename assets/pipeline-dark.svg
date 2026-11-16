@@ -1,17 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 214" width="840" height="214" role="img" aria-label="Stack: query with SQL, PostgreSQL, SQLite, MySQL, Parquet. Analyze with Python, pandas, NumPy. Serve with FastAPI, SQLAlchemy, Firebase, Docker. Show with React, TypeScript, Power BI, Three.js, Figma.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 214" width="840" height="214" fill="#e6edf3" role="img" aria-label="Stack: query with SQL, PostgreSQL, SQLite, MySQL, Parquet. Analyze with Python, pandas, NumPy. Serve with FastAPI, SQLAlchemy, Firebase, Docker. Show with React, TypeScript, Power BI, Three.js, Figma.">
 <title>Stack: query with SQL, PostgreSQL, SQLite, MySQL, Parquet. Analyze with Python, pandas, NumPy. Serve with FastAPI, SQLAlchemy, Firebase, Docker. Show with React, TypeScript, Power BI, Three.js, Figma.</title>
 <style>
-text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif;fill:#e6edf3}
+text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif}
 .m{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace}
-.cap{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace;font-size:11px;fill:#7d8796;letter-spacing:.3px}
-.dim{fill:#7d8796}
+.cap{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace;font-size:11px;letter-spacing:.3px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 
 .dot{animation:dot 2.4s ease-in-out infinite}
 @keyframes dot{0%{transform:translateX(0);opacity:0}15%{opacity:1}85%{opacity:1}100%{transform:translateX(18px);opacity:0}}
 </style>
 <rect x=".5" y=".5" width="839" height="213" rx="14" fill="#07090d" stroke="#1b2430"/>
-<text class="cap" x="28" y="30">fig. 8 · the stack, in the order data moves through it</text>
+<text class="cap" fill="#7d8796" x="28" y="30">fig. 10 · the stack, in the order data moves through it</text>
 <rect x="28" y="52" width="176" height="48" rx="10" fill="#0c1118" stroke="#1b2430"/>
 <rect x="28" y="52" width="4" height="48" rx="2" fill="#00e1ff"/>
 <text class="m" x="46" y="73" font-size="10.5" fill="#00e1ff">01</text>
